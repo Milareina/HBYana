@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>С Днём Рождения, Яна!</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Prata&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Playwrite+DK+Loopet:wght@100..400&family=Prata&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background: url(/assets/party-background-with-joyful-elements-free-vector.jpg)
+          no-repeat fixed;
+        background-size: cover;
+        min-height: 100vh;
+        font-family: "Roboto", sans-serif;
+        overflow-x: hidden;
+        position: relative;
+      }
+
+      #yanochka {
+        position: relative;
+        background: radial-gradient(circle, #ff6b6b, #ff9a9e);
+        overflow: hidden;
+        width: 100%;
+        text-align: center;
+      }
+
+      .stars {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      .star {
+        position: absolute;
+        width: 8px;
+        height: 8px;
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 50%;
+        animation: twinkle 3s infinite ease-in-out;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+      }
+
+      @keyframes twinkle {
+        0%,
+        100% {
+          opacity: 0.2;
+          transform: scale(0.8);
+        }
+        50% {
+          opacity: 1;
+          transform: scale(1.2);
+        }
+      }
+
+      .background-animation {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        background: url("https://images.unsplash.com/photo-1516541196182-6bdb0516ed5d")
+          center/cover;
+        animation: pulse 10s infinite ease-in-out;
+        opacity: 0.3;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+          opacity: 0.3;
+        }
+        50% {
+          transform: scale(1.05);
+          opacity: 0.5;
+        }
+      }
+
+      header {
+        background: rgba(255, 255, 255, 0);
+        backdrop-filter: blur(10px);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        transition: background 0.3s ease;
+      }
+
+      header.opaque {
+        background: #ffffff;
+        backdrop-filter: none;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .nav-link {
+        color: #7d2a3c;
+        font-family: "Dancing Script", cursive;
+        font-size: 1.5rem;
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+
+      nav a:hover {
+        color: #ff6b6b;
+      }
+
+      .gallery-card {
+        background: linear-gradient(45deg, #ffffff, #f8e1e1);
+        padding: 1.5rem;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+      }
+
+      .gallery-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+      }
+
+      .gallery-img {
+        width: 100%;
+        max-height: 400px;
+        object-fit: contain;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: opacity 0.5s ease-in-out;
+      }
+
+      .nav-button {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 40px;
+        height: 40px;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+      }
+
+      .nav-button:hover {
+        transform: translateY(-50%) scale(1.2);
+        box-shadow: 0 0 10px rgba(255, 105, 107, 0.5);
+      }
+
+      .nav-button svg {
+        width: 20px;
+        height: 20px;
+        fill: #ff6b6b;
+      }
+
+      .nav-prev {
+        left: -50px;
+      }
+
+      .nav-next {
+        right: -50px;
+      }
+
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        z-index: 100;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .modal-img {
+        max-width: 90%;
+        max-height: 90%;
+        border-radius: 10px;
+      }
+
+      .modal-button {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        font-size: 1.5rem;
+        border-radius: 50%;
+      }
+
+      .modal-prev {
+        left: 20px;
+      }
+
+      .modal-next {
+        right: 20px;
+      }
+
+      .modal-close {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        padding: 5px 15px;
+        border: none;
+        cursor: pointer;
+        font-size: 1.2rem;
+        border-radius: 50%;
+      }
+
+      .cake-video {
+        animation: bounce 2s infinite;
+        max-width: 500px;
+        margin: 0 auto;
+        border-radius: 10px;
+      }
+
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-20px);
+        }
+      }
+
+      #affirmations {
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .affirmation-photo-container {
+        position: relative;
+        max-width: 600px;
+        margin: 0 auto;
+        text-align: center;
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+      }
+
+      .affirmation-photo-container:hover {
+        transform: scale(1.05);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+      }
+
+      .affirmation-photo {
+        width: 100%;
+        height: auto;
+        border-radius: 15px;
+        object-fit: cover;
+        max-height: 400px;
+      }
+
+      .toopen {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #7d2a3c;
+        text-align: center;
+      }
+
+      .day-counter {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #7d2a3c;
+        margin-left: 1rem;
+      }
+
+      .surprise-button {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #ff6b6b;
+        color: white;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 25px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        cursor: pointer;
+        animation: pulseButton 2s infinite ease-in-out;
+        transition: transform 0.3s ease-in-out, 0.3s ease-in-out;
+      }
+
+      .surprise-button:hover {
+        background: #ff8787;
+        transform: translateX(-50%) scale(1.1);
+      }
+
+      @keyframes pulseButton {
+        0%,
+        100% {
+          transform: translateX(-50%) scale(1);
+        }
+        50% {
+          transform: translateX(-50%) scale(1.05);
+        }
+      }
+
+      .affirmation-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        backdrop-filter: blur(5px);
+        z-index: 100;
+        justify-content: center;
+        align-items: center;
+        animation: fadeIn 0.3s ease-out;
+      }
+
+      .affirmation-modal-content {
+        background: url("/assets/afirmation2.jpg") no-repeat center center;
+        padding: 2rem;
+        border-radius: 15px;
+        max-width: 500px;
+        text-align: center;
+        position: relative;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2),
+          0 0 20px rgba(255, 105, 107, 0.3);
+        animation: slideIn 0.3s ease-out;
+      }
+
+      .affirmation-modal-text {
+        text-align: center;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #7d2a3c;
+        line-height: 1.5;
+      }
+
+      .affirmation-modal-close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        padding: 5px 10px;
+        border: none;
+        cursor: pointer;
+        font-size: 1rem;
+        border-radius: 50%;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes slideIn {
+        from {
+          transform: translateY(-50px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      @media (min-width: 320px) {
+        header {
+          padding: 0.5rem 1rem;
+        }
+        nav {
+          flex-direction: row;
+          gap: 1rem;
+          justify-content: center;
+        }
+        .nav-link {
+          font-size: 1.2rem;
+        }
+        #yanochka {
+          padding: 1rem;
+        }
+        #yanochka h1 {
+          font-size: 2.5rem;
+        }
+        #yanochka p {
+          font-size: 1, 5rem;
+          max-width: 90%;
+          margin: 0 auto;
+        }
+        #moments {
+          padding: 1rem;
+        }
+        #moments h2 {
+          font-size: 2rem;
+        }
+        .gallery-card {
+          padding: 1rem;
+          max-width: 90%;
+          margin: 0 auto;
+        }
+        .gallery-img {
+          max-height: 400px;
+        }
+        .nav-prev {
+          left: 10px;
+        }
+        .nav-next {
+          right: 10px;
+        }
+        #affirmations {
+          padding: 1rem;
+        }
+        .affirmation-photo-container {
+          max-width: 90%;
+        }
+        .affirmation-photo {
+          max-height: 400px;
+        }
+        .toopen,
+        .day-counter {
+          font-size: 1.2rem;
+        }
+        .surprise-button {
+          padding: 10px 20px;
+          font-size: 1rem;
+        }
+        .affirmation-modal-content {
+          max-width: 90%;
+          padding: 1.5rem;
+        }
+        .affirmation-modal-text {
+          font-size: 1.2rem;
+        }
+        footer {
+          padding: 1rem;
+        }
+        .cake-video {
+          max-width: 100%;
+          max-height: 600px;
+        }
+        footer p,
+        footer span {
+          font-size: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="background-animation"></div>
+    <header class="py-4 shadow-lg">
+      <div class="container mx-auto flex justify-center items-center px-4">
+        <nav
+          class="container mx-auto flex justify-center space-x-8 text-lg font-semibold text-gray-800"
+        >
+          <a href="#yanochka" class="nav-link">Яночка</a>
+          <a href="#moments" class="nav-link">Лучшие моменты</a>
+          <a href="#affirmations" class="nav-link">Сюрпрайз</a>
+        </nav>
+      </div>
+    </header>
+    <section
+      id="yanochka"
+      class="min-h-screen flex items-center justify-center py-16 relative"
+    >
+      <div class="stars" id="stars"></div>
+      <div class="container mx-auto text-center text-gray-800 relative z-10">
+        <h1 class="text-5xl font-bold mb-6">С Днём Рождения! 🎉</h1>
+        <p class="text-xl max-w-2xl mx-auto leading-relaxed">
+          Дорогая моя Яночка, моя лучшая подруга! <br />
+          Сегодня, самый прекрасный день, твой день!<br />
+          И я хочу от всего сердца сказать, как сильно ты мне дорога. Ты —
+          настоящий дар: мой свет в тёмные дни, моя поддержка в трудные моменты,
+          мой смех и моя радость. Спасибо за каждую минуту, что мы разделили, за
+          твою безграничную доброту, искренность и ту невероятную энергию,
+          которой ты озаряешь всё вокруг. <br />
+          Яша, ты — человек, способный на всё. Какие бы трудности ни встречались
+          на твоём пути, я знаю: ты преодолеешь их с той же силой и грацией, что
+          всегда в тебе живёт. У тебя огромное сердце и мощный дух, и нет
+          ничего, что ты не смогла бы достичь. В твоей карьере психолога я желаю
+          тебе вдохновения, чтобы помогать людям находить свет в их душах, и
+          огромной удачи, чтобы каждый твой шаг был успешным. Пусть мир вокруг
+          тебя будет добрым, а люди — открытыми и благодарными за твою заботу.
+          Пусть этот день, да и вся твоя жизнь, будет полна тепла, любви и
+          исполнения самых заветных мечт. Ты достойна всего самого прекрасного,
+          и я всегда, всегда буду рядом, чтобы поддержать тебя и разделить твои
+          победы. <br />
+          Люблю тебя всем сердцем! ❤️
+        </p>
+      </div>
+    </section>
+    <section id="moments" class="min-h-screen py-16 bg-white bg-opacity-80">
+      <div class="container mx-auto text-center">
+        <h2 class="text-4xl font-bold mb-8 text-gray-800">Лучшие моменты</h2>
+        <div class="relative max-w-3xl mx-auto">
+          <div class="gallery-card">
+            <img
+              id="gallery-img"
+              class="gallery-img"
+              src="/assets/shamblen-studios-pJ_DCj9KswI-unsplash.jpg"
+              alt="Moment"
+            />
+          </div>
+          <button
+            onclick="prevImage()"
+            class="nav-button nav-prev"
+            aria-label="Предыдущее изображение"
+          >
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M15 18 l-6-6 6-6"
+                stroke="#ff6b6b"
+                stroke-width="2"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+          <button
+            onclick="nextImage()"
+            class="nav-button nav-next"
+            aria-label="Следующее изображение"
+          >
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M9 6 l6 6-6 6"
+                stroke="#ff6b6b"
+                stroke-width="2"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </section>
+    <section
+      id="affirmations"
+      class="min-h-screen flex items-center justify-center py-16 relative"
+    >
+      <div class="stars" id="affirmation-stars"></div>
+      <div class="flex items-center">
+        <span class="toopen">Открывай каждый день</span>
+        <span class="day-counter" id="day-counter"></span>
+      </div>
+      <div class="affirmation-photo-container">
+        <img
+          class="affirmation-photo"
+          src="/assets/surpriseimg.png"
+          alt="Surprise Photo"
+        />
+        <button class="surprise-button" onclick="openAffirmationModal()">
+          Нажми меня!
+        </button>
+      </div>
+      <span class="toopen">Не упусти момент</span>
+    </section>
+    <div id="affirmation-modal" class="affirmation-modal">
+      <div class="affirmation-modal-content">
+        <button
+          class="affirmation-modal-close"
+          onclick="closeAffirmationModal()"
+        >
+          ✕
+        </button>
+        <h2 class="text-3xl font-bold mb-4 text-gray-800">Аффирмация дня</h2>
+        <p id="affirmation-modal-text" class="affirmation-modal-text"></p>
+      </div>
+    </div>
+    <footer class="py-16 text-center">
+      <video class="cake-video" autoplay loop muted playsinline>
+        <source src="/assets/video-img.mp4" type="video/mp4" />
+        Ваш браузер не поддерживает видео.
+      </video>
+      <p class="text-gray-800 mt-4">С любовью, твоя подруга айтишница ❤️</p>
+      <span>© 7 мая 2025</span>
+    </footer>
+    <div id="modal" class="modal">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <img id="modal-img" class="modal-img" src="" alt="Moment" />
+      <button class="modal-button modal-prev" onclick="modalPrevImage()">
+        ←
+      </button>
+      <button class="modal-button modal-next" onclick="modalNextImage()">
+        →
+      </button>
+    </div>
+    <script>
+      document.querySelectorAll(".nav-link").forEach((link) => {
+        link.addEventListener("click", (e) => {
+          e.preventDefault();
+          const targetId = link.getAttribute("href").substring(1);
+          document
+            .getElementById(targetId)
+            .scrollIntoView({ behavior: "smooth" });
+        });
+      });
+
+      const images = [
+        "/assets/img1.JPG",
+        "/assets/IMG_1304.jpg",
+        "/assets/IMG_1537.jpg",
+        "/assets/IMG_2519.jpg",
+        "/assets/IMG_2550.jpg",
+        "/assets/IMG_2640.jpg",
+        "/assets/IMG_3301.jpg",
+        "/assets/IMG_3725.JPG",
+        "/assets/IMG_4115.jpg",
+        "/assets/IMG_4196.jpg",
+        "/assets/IMG_4312.jpg",
+        "/assets/IMG_4720.jpg",
+        "/assets/IMG_4733.JPG",
+        "/assets/IMG_5419.JPG",
+        "/assets/IMG_6251.jpg",
+        "/assets/IMG_7458.JPG",
+        "/assets/IMG_7509.jpg",
+        "/assets/IMG_9217.jpg",
+      ];
+      let currentImageIndex = 0;
+      const galleryImg = document.getElementById("gallery-img");
+      const modal = document.getElementById("modal");
+      const modalImg = document.getElementById("modal-img");
+
+      function showImage(index) {
+        galleryImg.style.opacity = 0;
+        setTimeout(() => {
+          galleryImg.src = images[index];
+          galleryImg.style.opacity = 1;
+        }, 500);
+      }
+
+      function nextImage() {
+        currentImageIndex = (currentImageIndex + 1) % images.length;
+        showImage(currentImageIndex);
+      }
+
+      function prevImage() {
+        currentImageIndex =
+          (currentImageIndex - 1 + images.length) % images.length;
+        showImage(currentImageIndex);
+      }
+
+      galleryImg.addEventListener("click", () => {
+        modal.style.display = "flex";
+        modalImg.src = images[currentImageIndex];
+      });
+
+      function closeModal() {
+        modal.style.display = "none";
+      }
+
+      function modalNextImage() {
+        currentImageIndex = (currentImageIndex + 1) % images.length;
+        modalImg.src = images[currentImageIndex];
+        showImage(currentImageIndex);
+      }
+
+      function modalPrevImage() {
+        currentImageIndex =
+          (currentImageIndex - 1 + images.length) % images.length;
+        modalImg.src = images[currentImageIndex];
+        showImage(currentImageIndex);
+      }
+
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal) {
+          closeModal();
+        }
+      });
+
+      const starsContainer = document.getElementById("stars");
+      for (let i = 0; i < 50; i++) {
+        const star = document.createElement("div");
+        star.className = "star";
+        star.style.left = `${Math.random() * 100}%`;
+        star.style.top = `${Math.random() * 100}%`;
+        star.style.animationDelay = `${Math.random() * 3}s`;
+        starsContainer.appendChild(star);
+      }
+
+      const affirmationStarsContainer =
+        document.getElementById("affirmation-stars");
+      for (let i = 0; i < 50; i++) {
+        const star = document.createElement("div");
+        star.className = "star";
+        star.style.left = `${Math.random() * 100}%`;
+        star.style.top = `${Math.random() * 100}%`;
+        star.style.animationDelay = `${Math.random() * 3}s`;
+        affirmationStarsContainer.appendChild(star);
+      }
+
+      const affirmations = [
+        "Я принимаю всю себя — свет и тени — и нахожу в этом силу.",
+        "Сегодня мой день рождения и начало нового счастливого пути.",
+        "Моя душа знает путь, и я доверяю ей безоговорочно.",
+        "Я трансформирую свои страхи в смелость и двигаюсь вперед.",
+        "В каждом вызове я нахожу возможность для роста и мудрости.",
+        "Я — источник любви, и она течет через меня к миру.",
+        "Мое прошлое учит меня, но не ограничивает мой потенциал.",
+        "Я отпускаю ожидания других и живу в гармонии со своей правдой.",
+        "Сегодня я выбираю осознанность и проживаю каждый момент глубоко.",
+        "Моя внутренняя тишина — это моя сила, и я нахожу в ней ответы.",
+        "Я достойна всего, что желаю, и смело иду к этому.",
+        "Я позволяю себе чувствовать все эмоции и нахожу в них смысл.",
+        "Моя энергия очищается, и я привлекаю только то, что мне созвучно.",
+        "Я создаю пространство для мира и изобилия в своей душе.",
+        "Сегодня я отпускаю контроль и доверяю течению жизни.",
+        "Моя уникальность — мой дар, и я делюсь им с миром.",
+        "Я исцеляю себя любовью и принимаю каждый шаг своего пути.",
+        "Мои границы — это акт заботы о себе, и я их уважаю.",
+        "Я нахожу баланс между действием и покоем, слушая себя.",
+        "Сегодня я освобождаюсь от сомнений и верю в свою внутреннюю силу.",
+        "Моя жизнь — это путешествие к себе, и каждый день я ближе к истине.",
+        "Я позволяю себе быть уязвимой, зная, что это моя суперсила.",
+        "Я привлекаю отношения, которые питают мою душу и сердце.",
+        "Мое сердце открыто для прощения — себя и других.",
+        "Я выбираю мысли, которые укрепляют мою веру в себя.",
+        "Сегодня я нахожу радость в простоте и глубину в обыденности.",
+        "Моя интуиция — мой компас, и я следую ее зову.",
+        "Я достойна жить в гармонии, и я создаю ее своими руками.",
+        "Я отпускаю то, что не мое, и принимаю то, что предназначено.",
+        "Сегодня я — воплощение силы, любви и осознанности.",
+      ];
+
+      const affirmationModal = document.getElementById("affirmation-modal");
+      const affirmationModalText = document.getElementById(
+        "affirmation-modal-text"
+      );
+      const dayCounter = document.getElementById("day-counter");
+
+      function updateDayCounter() {
+        const startDate = new Date("2025-05-07");
+        const currentDate = new Date();
+        const daysSinceStart = Math.floor(
+          (currentDate - startDate) / (1000 * 60 * 60 * 24)
+        );
+        const dayNumber = (daysSinceStart % 30) + 1;
+        dayCounter.textContent = `${dayNumber}/30`;
+      }
+
+      function openAffirmationModal() {
+        const startDate = new Date("2025-05-06");
+        const currentDate = new Date();
+        const daysSinceStart = Math.floor(
+          (currentDate - startDate) / (1000 * 60 * 60 * 24)
+        );
+        const affirmationIndex = daysSinceStart % affirmations.length;
+        affirmationModalText.textContent = affirmations[affirmationIndex];
+        affirmationModal.style.display = "flex";
+      }
+
+      function closeAffirmationModal() {
+        affirmationModal.style.display = "none";
+      }
+
+      affirmationModal.addEventListener("click", (e) => {
+        if (e.target === affirmationModal) {
+          closeAffirmationModal();
+        }
+      });
+
+      updateDayCounter();
+
+      const header = document.querySelector("header");
+      const yanochkaSection = document.getElementById("yanochka");
+
+      window.addEventListener("scroll", () => {
+        const yanochkaRect = yanochkaSection.getBoundingClientRect();
+        const headerHeight = header.offsetHeight;
+        if (
+          yanochkaRect.top <= headerHeight &&
+          yanochkaRect.bottom >= headerHeight
+        ) {
+          header.classList.add("opaque");
+        } else {
+          header.classList.remove("opaque");
+        }
+      });
+    </script>
+  </body>
+</html>
